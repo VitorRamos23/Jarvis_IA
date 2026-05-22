@@ -9,20 +9,6 @@ os.makedirs('/content/drive/MyDrive/Jarvis/Data', exist_ok=True)
 
 #Por meio da pergunta vai pegar os dados que correspondem
 def responder_agenda(pergunta, periodo):
-  """
-  pergunta_normalizada = pergunta.lower()
-  if "hoje" in pergunta_normalizada:
-    periodo = "hoje"
-  elif "amanhã" in pergunta_normalizada or "amanha" in pergunta_normalizada:
-    periodo = "amanha"
-  elif "semana" in pergunta_normalizada:
-    periodo = "semana"
-  # Adicionar esse campo para tornar mais completo o JARVIS
-  elif "semana que vem" in pergunta_normalizada or "próxima semana" in pergunta_normalizada:
-    periodo = "proxima_semana"
-  else:
-    return "Desculpe, só consulto a agenda para 'hoje', 'amanhã', 'esta semana' ou semana que vem."
-  """
   compromissos = consultar_agenda_melhorada(periodo)
 
   # IA com problemas, alucinando com os dias da semana
@@ -68,19 +54,6 @@ def responder_agenda(pergunta, periodo):
   )
 
   return resposta.choices[0].message.content
-
-"""
-# Teste 1: Consulta Diária
-print(responder_agenda("O que tenho para hoje?"))
-print("-" * 60)
-
-# Teste 2: Consulta Crítica (Provas)
-print(responder_agenda("Tenho alguma prova amanhã?"))
-print("-" * 60)
-
-# Teste 3: Visão Semanal
-print(responder_agenda("Quais são as minhas aulas esta semana?"))
-"""
 
 import os
 
