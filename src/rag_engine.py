@@ -43,8 +43,6 @@ def recuperar_dense(pergunta, k=3):
     """Busca semântica: encontra chunks com significado similar à pergunta."""
     q = modelo_embed.encode([pergunta], normalize_embeddings=True).astype("float32")
     scores, idx = indice_faiss.search(q, k)
-    # Quando k > total de chunks, FAISS preenche com índice -1.
-    # Em Python, chunks[-1] retornaria o último chunk (errado!), então filtramos.
     return [
         {"id": biblioteca_jarvis[i]["id"], "conteudo": biblioteca_jarvis[i]["conteudo"], "score": float(scores[0][j])}
         for j, i in enumerate(idx[0])
@@ -62,10 +60,6 @@ def normalizar(v):
 
 
 def recuperar_hibrido(pergunta, k=3, alpha=0.6):
-    """
-    Combina BM25 e semântico.
-    alpha = peso do semântico (0 = só BM25, 1 = só semântico, 0.6 = padrão)
-    """
     sb = normalizar(indice_bm25.get_scores(tokenizar(pergunta)))
     q = modelo_embed.encode([pergunta], normalize_embeddings=True).astype("float32")
     sd = normalizar(np.dot(matriz_emb, q[0]))
@@ -207,42 +201,6 @@ print(textwrap.fill(resposta, width=90))
 import json
 import pytz # Para colocar a data no fuso-horário local
 from datetime import date, timedelta, datetime
-
-# --- Agenda simples para testes ---
-"""
-# Data adquirida de forma dinâmica
-hoje = date.today()
-amanha = hoje + timedelta(days=1)
-depois_de_amanha = hoje + timedelta(days=2)
-
-# criação da agenda de teste
-agenda = [
-    {
-        "data": hoje.strftime("%d/%m/%Y"),
-        "tipo": "reuniao",
-        "titulo": "TCC",
-        "horario": "15:25 - 16:25"
-    },
-    {
-        "data": hoje.strftime("%d/%m/%Y"),
-        "tipo": "aula",
-        "titulo": "Inteligência Artificial",
-        "horario": "18:30 - 22:30"
-    },
-    {
-        "data": amanha.strftime("%d/%m/%Y"),
-        "tipo": "prova",
-        "titulo": "Avaliação de Banco de Dados",
-        "horario": "07:15 - 09:15"
-    },
-    {
-        "data": depois_de_amanha.strftime("%d/%m/%Y"),
-        "tipo": "aula",
-        "titulo": "Programação Paralela",
-        "horario": "07:15 - 09:15"
-    }
-]
-"""
 
 # --- Agenda melhorada ---
 agenda = [
