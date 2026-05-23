@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-src_projeto = Path(file).parent if "file" in locals() else Path.cwd()
+src_projeto = Path(__file__).parent if "file" in locals() else Path.cwd()
 
 raiz_projeto = src_projeto.parent
 
