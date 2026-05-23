@@ -4,6 +4,7 @@ python3 -m venv venv
 
 # 2. Entra na bolha (ativa o ambiente)
 source venv/bin/activate
+
 #-----------------------------------------------------------------------------#
 
 Para fazer as instalações:
