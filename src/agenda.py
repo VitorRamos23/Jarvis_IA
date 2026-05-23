@@ -58,7 +58,7 @@ def inicializar_agenda():
             "horario": "07:15 - 09:15",
             "recorrencia": "unica",
             "data": "29/05/2026"
-        }
+        },
         {
             "titulo": "Prova de Calculo",
             "tipo": "prova",
