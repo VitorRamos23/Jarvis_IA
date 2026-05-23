@@ -1,91 +1,69 @@
-# -*- coding: utf-8 -*-
 import json
 import pytz # Para colocar a data no fuso-horário local
 from datetime import date, timedelta, datetime
-from openai import OpenAI
+from pathlib import Path
+from config import client
 
+src_projeto = Path(__file__).parent if "__file__" in locals() else Path.cwd()
+raiz_projeto = src_projeto.parent
 
-# --- Agenda melhorada ---
-agenda = [
+# Define as pastas de origem e destino
+caminho_agenda = raiz_projeto / "agenda.json"
 
-    # Compromissos Recorrentes (Toda semana)
-     {
-       "titulo": "Reunião de TCC",
-       "tipo": "reuniao",
-       "horario": "15:25 - 16:25",
-       "recorrencia": "semanal",
-       "dia_de_semana": 3 # Quinta feira
-    },
-    {
-        "titulo": "Aula de Inteligência Artificial",
-        "tipo": "aula",
-        "horario": "18:30 - 22:30",
-        "recorrencia": "semanal",
-        "dia_de_semana": 0 # Segunda feira
-    },
-    # Compromissos Únicos (data específica)
-    {
-        "titulo": "Prova de Banco de Dados",
-        "tipo": "prova",
-        "horario": "07:15 - 09:15",
-        "recorrencia": "unica",
-        "data": "22/05/2026"
-    },
-    {
-        "titulo": "Prova de Inteligência Artifical",
-        "tipo": "prova",
-        "horario": "18:30 - 22:30",
-        "recorrencia": "unica",
-        "data": "01/06/2026"
-    },
-    {
-        "titulo": "Prova de Banco de Dados",
-        "tipo": "prova",
-        "horario": "07:15 - 09:15",
-        "recorrencia": "unica",
-        "data": "19/05/2026"
-    }
-]
+def inicializar_agenda():
+    if caminho_agenda.exists():
+        return
 
-#Planilha armazenada localmente (JSON)
-caminho_agenda = "agenda.json"
-with open(caminho_agenda, "w", encoding= "utf-8") as arquivo:
-    json.dump(agenda, arquivo, indent=4, ensure_ascii=False)
+    agenda = [
+        # Compromissos Recorrentes (Toda semana)
+        {
+            "titulo": "Reunião de TCC",
+            "tipo": "reuniao",
+            "horario": "15:25 - 16:25",
+            "recorrencia": "semanal",
+            "dia_de_semana": 3 # Quinta feira
+        },
+        {
+            "titulo": "Aula de Inteligência Artificial",
+            "tipo": "aula",
+            "horario": "18:30 - 22:30",
+            "recorrencia": "semanal",
+            "dia_de_semana": 0 # Segunda feira
+        },
+        # Compromissos Únicos (data específica)
+        {
+            "titulo": "Prova de Banco de Dados",
+            "tipo": "prova",
+            "horario": "07:15 - 09:15",
+            "recorrencia": "unica",
+            "data": "22/05/2026"
+        },
+        {
+            "titulo": "Prova de Inteligência Artifical",
+            "tipo": "prova",
+            "horario": "18:30 - 22:30",
+            "recorrencia": "unica",
+            "data": "01/06/2026"
+        },
+        {
+            "titulo": "Prova de Banco de Dados",
+            "tipo": "prova",
+            "horario": "07:15 - 09:15",
+            "recorrencia": "unica",
+            "data": "19/05/2026"
+        }
+    ]
 
-print(f"Agenda salva em {caminho_agenda} e pronta para os testes")
-
-def carregar_agenda():
-  with open("agenda.json", "r", encoding="utf-8") as arquivo:
-    return json.load(arquivo)
-
-
-def consultar_agenda_simples(periodo="hoje"):
-  # Realiza as consultas com base no tempo
-  agenda = carregar_agenda()
-  hoje = date.today()
-  compromissos = []
-
-  if periodo == "hoje":
-    data_inicio = data_fim = hoje
-  elif periodo == "amanha":
-    data_inicio = data_fim = hoje + timedelta(days=1)
-  elif periodo == "semana":
-    data_inicio = hoje - timedelta(days=hoje.weekday())
-    data_fim = data_inicio + timedelta(days=6)
-  else:
-    raise ValueError(f"Periodo desconhecido: {periodo}")
-
-  for item in agenda:
-    data_item = datetime.strptime(item["data"], "%d/%m/%Y").date()
-    if data_inicio <= data_item <= data_fim:
-      compromissos.append(item)
-
-  return compromissos
+    with open(caminho_agenda, "w", encoding= "utf-8") as arquivo:
+        json.dump(agenda, arquivo, indent=4, ensure_ascii=False)
+    print(f"Agenda salva em {caminho_agenda} e pronta para os testes")
+  
+inicializar_agenda()
 
 def consultar_agenda_melhorada(periodo="hoje"):
   # Vai considerar compromissos recorrentes ao longo das semanas
 
-  with open("agenda.json", "r", encoding="utf-8") as arquivo:
+  with open(caminho_agenda, "r", encoding="utf-8") as arquivo:
     agenda = json.load(arquivo)
 
   fuso_local = pytz.timezone('America/Campo_Grande')
@@ -104,7 +82,6 @@ def consultar_agenda_melhorada(periodo="hoje"):
     data_fim = data_inicio + timedelta(days=6)
   else:
     raise ValueError(f"Periodo desconhecido: {periodo}")
-    return []
 
   # Loop que percorre cada dia do período solicitado
   dia = data_inicio
@@ -113,7 +90,6 @@ def consultar_agenda_melhorada(periodo="hoje"):
     data_atual = dia.strftime("%d/%m/%Y")
 
     for item in agenda:
-
       if item.get("recorrencia") == "unica" and item.get("data") == data_atual:
         item_formatado = item.copy()
         item_formatado["data"] = data_atual
@@ -130,6 +106,9 @@ def consultar_agenda_melhorada(periodo="hoje"):
 
 #Por meio da pergunta vai pegar os dados que correspondem
 def responder_agenda(pergunta, periodo):
+  """
+  Monta o contexto e pede para Gemma-3 formular a resposta falada.
+  """
   compromissos = consultar_agenda_melhorada(periodo)
 
   # IA com problemas, alucinando com os dias da semana
@@ -156,7 +135,7 @@ def responder_agenda(pergunta, periodo):
     "Você é o JARVIS. Responda à pergunta do usuário de forma natural, direta e amigável."
     "Regras ESTRITAS:\n"
     "1. NUNCA use frases robóticas como 'Baseado na agenda...' ou 'Você perguntou sobre...'. Vá direto ao ponto.\n"
-    "2. Se uma data no contexto for anterior ao dia de hoje, informe que o evento já ocorreu.\n"
+    "2. EVENTOS PASSADOS: Verifique a data e o HORÁRIO. Se a data for anterior a hoje, OU se for hoje mas o horário de término já passou da 'Hora Atual', informe claramente que o evento já ocorreu/já acabou.\n"
     "3. Se não houver compromissos, diga simplesmente que a agenda está livre.\n\n"
     "4. NÃO TENTE ADIVINHAR OS DIAS DA SEMANA. Use EXATAMENTE os dias que estão entre parênteses no contexto abaixo.\n\n"
     f"Hoje é: {hoje_atual.strftime('%d/%m/%Y')} ({dias_semana[hoje_atual.weekday()]})\n\n"
@@ -175,3 +154,15 @@ def responder_agenda(pergunta, periodo):
   )
 
   return resposta.choices[0].message.content
+
+if __name__ == "__main__":
+    # Teste 1: Consulta Diária
+    print(responder_agenda("O que tenho para hoje?", "hoje"))
+    print("-" * 60)
+
+    # Teste 2: Consulta Crítica (Provas)
+    print(responder_agenda("Tenho alguma prova amanhã?", "amanha"))
+    print("-" * 60)
+
+    # Teste 3: Visão Semanal
+    print(responder_agenda("Quais são as minhas aulas esta semana?", "semana"))
