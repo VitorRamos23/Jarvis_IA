@@ -1,3 +1,5 @@
+-- coding: utf-8 --
+
 from pathlib import Path
 
 src_projeto = Path(file).parent if "file" in locals() else Path.cwd()
