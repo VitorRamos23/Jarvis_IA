@@ -40,6 +40,7 @@ Jarvis_IA-main/
 │   ├── criacao_de_pasta.py
 │   ├── lista_de_tarefas.py
 │   ├── rag_busca_chunks.py
+│   ├── terminal.py
 │   └── tool_calling.py
 │
 ├── .env
@@ -75,15 +76,22 @@ pip install -qU python-telegram-bot nest_asyncio
 pip install pytz
 ```
 
-## Passo 4 — Executar o projeto
+## Passo 4 — Converter Arquivos pdf para md
 
 ```bash
 python3 src/conversao.py
-python3 src/bot_telegram.py
+
 ```
 
 
-## Passo 5 Acessar o bot no Telegram
+## Passo 5 Executando o Jarvis
+
+### Passo 5.1 Ativando e utilizando o Jarvis no Telegram
+
+```bash
+python3 src/bot_telegram.py
+```
+### link para o bot no Telegram
 
 http://t.me/jarvis_ufms_ia_bot
 
@@ -91,6 +99,12 @@ O comando de inicialização é
 ```bash
 /start
 ```
+### Passo 5.2 Ativiando e utilizando o Jarvis no Terminal
+
+```bash
+python3 src/terminal.py
+```
+
 ---
 # Link
 Caso queira acessar pelo Google Colab, segue o link para o notebook:
