@@ -46,8 +46,12 @@ Jarvis_IA-main/
 ├── README.md
 ```
 
-# COMO EXECUTAR
+# COMO EXECUTAR - Linux
 
+##Pré-requisito 
+```bash
+  apt install python3.12-venv
+```
 ## Passo 1 — Criar o ambiente virtual
 
 ```bash
