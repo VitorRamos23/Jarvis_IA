@@ -1,0 +1,31 @@
+Resumo dos Arquivos:
+
+1. approximate_circuits.pdf
+Conteúdo: Artigo científico (em inglês) que discute a precisão e a eficiência física de circuitos aritméticos aproximados, avaliando o compromisso entre a precisão das operações e a economia de área e energia em plataformas FPGA.
+
+2. i5.pdf
+Conteúdo: Artigo jurídico intitulado "Inteligência Artificial e Direitos da Personalidade: Uma Contradição em Termos?", que explora os impactos positivos e negativos da IA, com foco especial no direito à privacidade e na defesa da dignidade humana.
+
+3. i7.pdf
+Conteúdo: Livro/Coletânea intitulada "Inteligência Artificial e Direito Processual", que reúne diversos autores para debater os impactos da tecnologia, algoritmos e da IA no âmbito do direito processual e da justiça.
+
+4. ia1.pdf
+Conteúdo: Artigo sobre "Inteligência Artificial e sociedade: avanços e riscos", destacando o histórico da IA, seus grandes avanços e os potenciais riscos para a sociedade caso não haja um debate e uma regulação adequada dos sistemas autônomos.
+
+5. ia2.pdf
+Conteúdo: Artigo focado em "Inteligência artificial na educação: potencialidades e desafios", analisando o uso prático da IA em sala de aula (sistemas de tutoria, assistentes virtuais) e discutindo os desafios éticos, como viés algorítmico e privacidade.
+
+6. ia3.pdf
+Conteúdo: Artigo sobre "Inteligência Artificial: riscos, benefícios e uso responsável", discutindo o crescimento acelerado da IA no cotidiano e a importância de criar e utilizar algoritmos levando em consideração questões éticas, sociais e legais.
+
+7. ia4.pdf
+Conteúdo: Artigo sobre "Inteligência Artificial: Conceitos e Aplicações", que aborda as origens históricas da IA e as tentativas da ciência da computação de simular o raciocínio humano desde a década de 1950.
+
+8. ia6.pdf
+Conteúdo: Um "Survey" (revisão exploratória bibliométrica) sobre a Inteligência Artificial na Educação, que busca mapear os caminhos e as tendências das publicações e estudos da IA no campo educacional nos últimos anos.
+
+9. ia8.pdf
+Conteúdo: Artigo sobre como a IA está mudando a maneira como aprendemos e ensinamos. Avalia a inserção da IA na educação a distância, apresentando vantagens (personalização do ensino) e desafios, citando ferramentas como o Watson Education da IBM.
+
+10. IL_Multicore.pdf
+Conteúdo: Artigo científico (em inglês) que propõe uma extensão ao conjunto de instruções (ISA) RISC-V para suportar processadores multicore aproximados (Instruction-Level Approximate Functions), buscando aliar performance e menor consumo de energia.
