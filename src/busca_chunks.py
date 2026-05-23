@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import re
 import numpy as np
 from rank_bm25 import BM25Okapi
@@ -96,3 +95,44 @@ indice_faiss = faiss.IndexFlatIP(dim)
 indice_faiss.add(matriz_emb.astype("float32"))
 
 print(f"JARVIS Atualizado! BM25 e FAISS prontos para busca híbrida.")
+
+
+def busca_hibrida(pergunta, top_k=3, peso_bm25=0.3, peso_faiss=0.7):
+    # 1. Busca Lexical (BM25)
+    tokens_pergunta = tokenizar(pergunta)
+    scores_bm25 = indice_bm25.get_scores(tokens_pergunta)
+
+    # 2. Busca Semântica (FAISS)
+    pergunta_emb = modelo_embed.encode([pergunta], normalize_embeddings=True).astype("float32")
+    scores_faiss, indices_faiss = indice_faiss.search(pergunta_emb, len(biblioteca_jarvis))
+
+    # Um array de zeros para o score semântico na ordem original da biblioteca
+    final_faiss_scores = np.zeros(len(biblioteca_jarvis))
+    for score, idx in zip(scores_faiss[0], indices_faiss[0]):
+        final_faiss_scores[idx] = score
+
+    # 3. Normalização e Combina
+    # Normalizamos os scores para ficarem entre 0 e 1
+    max_bm25 = np.max(scores_bm25) if np.max(scores_bm25) > 0 else 1
+
+    scores_combinados = []
+    for i in range(len(biblioteca_jarvis)):
+        s_bm25 = (scores_bm25[i] / max_bm25) * peso_bm25
+        s_faiss = final_faiss_scores[i] * peso_faiss # FAISS já costuma vir normalizado por IP
+
+        score_total = s_bm25 + s_faiss
+        scores_combinados.append((score_total, biblioteca_jarvis[i]))
+
+    # Ordena pelo score combinado
+    scores_combinados.sort(key=lambda x: x[0], reverse=True)
+
+    return [item[1] for item in scores_combinados[:top_k]]
+
+# --- TESTE DO JARVIS HÍBRIDO ---
+if __name__ == "__main__":
+    pergunta = "quais são os avanços da inteligência artificial"
+    resultados = busca_hibrida(pergunta, top_k=3)
+
+print(f"JARVIS encontrou {len(resultados)} trechos usando Busca Híbrida:")
+for r in resultados:
+    print(f"- Fonte: {r['fonte']} | Trecho: {r['conteudo'][:150]}...")
