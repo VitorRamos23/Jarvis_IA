@@ -8,10 +8,6 @@ import faiss
 from sentence_transformers import SentenceTransformer
 
 def construir_prompt(pergunta, docs):
-    """
-    Monta o conteúdo da mensagem do usuário enviada ao LLM.
-    O modelo deve responder APENAS com base no contexto fornecido.
-    """
     contexto = "\n\n".join(
         [f"Trecho {i+1}:\n{d['conteudo']}" for i, d in enumerate(docs)]
     )
