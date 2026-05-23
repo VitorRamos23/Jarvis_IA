@@ -1,5 +1,5 @@
 import time
-from jarvis_core import jarvis
+from tool_calling import jarvis
 
 def iniciar_terminal():
     print("="*60)
