@@ -46,22 +46,22 @@ Jarvis_IA-main/
 ├── README.md
 └── Jarvis_IA_Traduzido.ipynb
 ```
+
 # COMO EXECUTAR
 
-# Passo 1 - Acessando o Ambiente Virtual
+## Passo 1 — Criar o ambiente virtual
 
-Para acessar o Ambiente virtual é necessario 
-### 1. Cria a bolha (isso vai fazer a pasta venv aparecer aí na sua imagem)
+```bash
 python3 -m venv venv
+```
 
-### 2. Entra na bolha (ativa o ambiente)
+## Passo 2 — Ativar o ambiente virtual
+
+```bash
 source venv/bin/activate
+```
 
-
-
-# Passo 2 — Instalar as dependências
-
-Execute as células de instalação no topo do notebook, uma por vez:
+## Passo 3 — Instalar as dependências
 
 ```bash
 pip install openai python-dotenv
@@ -71,4 +71,21 @@ pip install -qU python-telegram-bot nest_asyncio
 pip install pytz
 ```
 
-# Passo 3 — Ativar o bot no Telegram 
+## Passo 4 — Executar o projeto
+
+```bash
+python3 src/conversao.py
+python3 src/bot_telegram.py
+```
+
+# Links
+
+## Bot no Telegram
+
+http://t.me/jarvis_ufms_ia_bot
+
+---
+
+Caso queira acessar pelo Google Colab, segue o link para o notebook:
+
+https://colab.research.google.com/drive/1iLglylzi4_hBEwvGvhZZKwTrwgMizIL3?usp=sharing
