@@ -1,12 +1,17 @@
-# -*- coding: utf-8 -*-
-
 import re
 import numpy as np
 from rank_bm25 import BM25Okapi
 import faiss
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
-from criacao_de_pasta import pasta_md
+
+src_projeto = Path(__file__).parent if "__file__" in locals() else Path.cwd()
+raiz_projeto = src_projeto.parent
+
+# Define as pastas de origem e destino
+pasta_md = raiz_projeto / "Markdown"
+
+# Função de chunks
 
 def chunking_fixo(texto, tamanho=500):
     chunks = []
@@ -33,7 +38,7 @@ def chunking_paragrafo(texto, min_chars=100):
     paragrafos = [p.strip() for p in texto.split("\n\n")]
     return [p for p in paragrafos if len(p) >= min_chars]
 
-# ── NOVA CAMADA: GERENCIADOR DE BIBLIOTECA ────────────────────────────────────
+# ── GERENCIADOR DE BIBLIOTECA ────────────────────────────────────
 
 def carregar_e_processar_biblioteca(pasta_origem, estrategia="janela"):
     """
@@ -44,15 +49,15 @@ def carregar_e_processar_biblioteca(pasta_origem, estrategia="janela"):
     print(f"Processando biblioteca em: {pasta_md}")
 
     for arquivo_md in pasta_md.glob("*.md"):
-        texto_raw = arquivo_md.read_text(encoding="utf-8")
+        texto_cru = arquivo_md.read_text(encoding="utf-8")
 
         # Seleciona a estratégia que será implementada nas chunks
         if estrategia == "fixo":
-            brutos = chunking_fixo(texto_raw)
+            brutos = chunking_fixo(texto_cru)
         elif estrategia == "janela":
-            brutos = chunking_janela(texto_raw)
+            brutos = chunking_janela(texto_cru)
         else:
-            brutos = chunking_paragrafo(texto_raw)
+            brutos = chunking_paragrafo(texto_cru)
 
         # Responsável por definir qual a fonte dos dados selecionados
         for i, trecho in enumerate(brutos):
@@ -63,10 +68,14 @@ def carregar_e_processar_biblioteca(pasta_origem, estrategia="janela"):
                     "conteudo": trecho.strip()
                 })
 
+    print(f"Sucesso! {len(todos_os_chunks)} chunks carregadas.")
+    return todos_os_chunks
 
 # Preparação para o BM25 (Lexical)
 def tokenizar(conteudo):
     return re.findall(r"\w+", conteudo.lower())
+
+# Incializador do motor de busca
 
 biblioteca_jarvis = carregar_e_processar_biblioteca(pasta_md, estrategia="janela")
 
@@ -86,5 +95,3 @@ indice_faiss = faiss.IndexFlatIP(dim)
 indice_faiss.add(matriz_emb.astype("float32"))
 
 print(f"JARVIS Atualizado! BM25 e FAISS prontos para busca híbrida.")
-    print(f"Sucesso! {len(todos_os_chunks)} chunks carregadas.")
-    return todos_os_chunks
