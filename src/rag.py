@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-
+from lexica_semantica import recuperar_bm25, recuperar_dense, recuperar_hibrido
 from openai import OpenAI
-from lexicase_mantica import recuperar_bm25, recuperar_dense, recuperar_hibrido
+
 
 client = OpenAI(
     base_url="https://llm.liaufms.org/v1/gemma-3-12b-it",
