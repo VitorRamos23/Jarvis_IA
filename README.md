@@ -108,7 +108,7 @@ O comando de inicialização é
 ```bash
 /start
 ```
-### Passo 5.2 Ativiando e utilizando o Jarvis no Terminal
+### Passo 5.2 Ativando e utilizando o Jarvis no Terminal
 
 ```bash
 python3 src/terminal.py
