@@ -2,6 +2,9 @@
 from datetime import datetime
 import json
 from openai import OpenAI
+from agenda import responder_agenda
+from tarefas import adicionar_tarefa, listar_tarefas, concluir_tarefa, limpar_tarefas
+from rag import responder_rag
 
 LOG = "jarvis_log.txt"
 
