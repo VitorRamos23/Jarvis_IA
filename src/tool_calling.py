@@ -1,18 +1,24 @@
-# -*- coding: utf-8 -*-
-from datetime import datetime
 import json
-from openai import OpenAI
-from agenda import responder_agenda
-from tarefas import adicionar_tarefa, listar_tarefas, concluir_tarefa, limpar_tarefas
-from rag import responder_rag
+from datetime import datetime
+from pathlib import Path
 
-LOG = "jarvis_log.txt"
+# Importação de outras funções criadas
+from config import client
+from rag_busca_chunks import responder_rag
+from agenda import responder_agenda
+from lista_de_tarefas import adicionar_tarefa, limpar_tarefas, concluir_tarefa, listar_tarefas
+
+src_projeto = Path(__file__).parent if "__file__" in locals() else Path.cwd()
+raiz_projeto = src_projeto.parent
+
+# Define as pastas de origem e destino
+caminho_log = raiz_projeto / "jarvis_log.json"
 
 def registrar_log(ferramenta, entrada, saida):
 
   agora = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-  with open(LOG, "a", encoding="utf-8") as arquivo:
+  with open(caminho_log, "a", encoding="utf-8") as arquivo:
     arquivo.write(f"[{agora}] ==========================\n")
     arquivo.write(f"FERRAMENTA CHAMADA : {ferramenta}\n")
     arquivo.write(f"ENTRADA (Parâmetro): {entrada}\n")
@@ -24,7 +30,10 @@ def registrar_log(ferramenta, entrada, saida):
 print("Sistema de registrado ativado")
 
 def jarvis(comando):
-  
+  """
+  Esta função chama todas as ferramentas criadas para o funcionamento
+  do JARVIS
+  """
   prompt = """
   Olá JARVIS. Analise o pedido do usuário e decida qual ferramenta utilizar.
   Você possui EXATAMENTE 6 ferramentas:
@@ -102,3 +111,20 @@ def jarvis(comando):
     erro_msg = f"Erro no JARVIS: {str(e)}"
     registrar_log("FALHA_SISTEMA", comando, erro_msg)
     return erro_msg
+  
+if __name__ == "__main__":
+    print("\n" + "="*50)
+    print("🤖 INICIANDO TESTES DO ORQUESTRADOR JARVIS")
+    print("="*50 + "\n")
+
+    # 1. Testando Tarefas
+    print(jarvis("Anota aí para eu revisar os códigos em VHDL do projeto amanhã cedo."))
+    print("-" * 50)
+    
+    # 2. Testando Agenda
+    print(jarvis("JARVIS, tenho alguma reunião com a Professora Daniela nesta semana?"))
+    print("-" * 50)
+    
+    # 3. Testando o RAG (Conhecimento Técnico)
+    print(jarvis("Quais as vantagens de aplicar computação aproximada em processadores RISC-V?"))
+    print("\n" + "="*50)
