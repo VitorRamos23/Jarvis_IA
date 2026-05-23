@@ -14,6 +14,17 @@ O JARVIS Acadêmico é um assistente virtual capaz de responder perguntas sobre 
 - Integração com bot do Telegram
 - Registro de ações em arquivo de log
 
+## Tecnologias Utilizadas
+
+- Python
+- FAISS
+- BM25
+- Sentence Transformers
+- Telegram Bot API
+- OpenAI SDK
+- Google Colab
+- Gemini AI (auxílio no desenvolvimento)
+
 ## Estrutura do Projeto
 
 ```text
