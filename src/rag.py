@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import textwrap
-import re
-import numpy as np
-from rank_bm25 import BM25Okapi
-import faiss
-from sentence_transformers import SentenceTransformer
+from openai import OpenAI
+from lexicase_mantica import recuperar_bm25, recuperar_dense, recuperar_hibrido
 
+client = OpenAI(
+    base_url="https://llm.liaufms.org/v1/gemma-3-12b-it",
+    api_key="SUA_CHAVE"
+)
 def construir_prompt(pergunta, docs):
     contexto = "\n\n".join(
         [f"Trecho {i+1}:\n{d['conteudo']}" for i, d in enumerate(docs)]
