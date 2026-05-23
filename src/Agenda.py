@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 import json
 import pytz # Para colocar a data no fuso-horário local
 from datetime import date, timedelta, datetime
-# -*- coding: utf-8 -*-
+
 
 # --- Agenda melhorada ---
 agenda = [
