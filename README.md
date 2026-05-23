@@ -1,6 +1,4 @@
-readme desatualizado
-
-pips
+Pips
 
 # Transformando PDF em MD
 !pip -q install -U docling transformers sentence-transformers
