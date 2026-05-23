@@ -77,14 +77,17 @@ python3 src/conversao.py
 python3 src/bot_telegram.py
 ```
 
-# Links
 
-## Bot no Telegram
+## Passo 5 Acessar o bot no Telegram
 
 http://t.me/jarvis_ufms_ia_bot
 
----
+O comando de inicialização é 
 
+/start
+
+---
+# Link
 Caso queira acessar pelo Google Colab, segue o link para o notebook:
 
 https://colab.research.google.com/drive/1iLglylzi4_hBEwvGvhZZKwTrwgMizIL3?usp=sharing
