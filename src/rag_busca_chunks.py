@@ -1,9 +1,11 @@
 import re
 import numpy as np
+import textwrap
 from rank_bm25 import BM25Okapi
 import faiss
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
+from config import client
 
 src_projeto = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 raiz_projeto = src_projeto.parent
@@ -136,3 +138,61 @@ if __name__ == "__main__":
 print(f"JARVIS encontrou {len(resultados)} trechos usando Busca Híbrida:")
 for r in resultados:
     print(f"- Fonte: {r['fonte']} | Trecho: {r['conteudo'][:150]}...")
+
+
+def construir_prompt(pergunta, docs):
+    contexto = "\n\n".join(
+        [f"Trecho {i+1}:\n{d['conteudo']}" for i, d in enumerate(docs)]
+    )
+    return (
+        "Você é o JARVIS. Responda à pergunta do usuário usando APENAS as informações do Contexto fornecido. "
+        "Atenção: O Contexto pode estar em inglês, mas você deve traduzir as informações e responder em PORTUGUÊS. "
+        "Se não houver informação suficiente no Contexto para responder, diga: 'não encontrado no contexto'.\n\n"
+        f"Contexto:\n{contexto}\n\n"
+        f"Pergunta: {pergunta}"
+    )
+
+
+def responder_rag(pergunta, metodo="hibrido", k=3, alpha=0.6, max_tokens=512):
+    """
+    Função principal do RAG:
+      1. Recupera os k chunks mais relevantes
+      2. Monta o prompt com o contexto usando o chat template do Qwen2.5
+      3. Gera a resposta com o LLM
+    """
+    
+    docs = busca_hibrida(pergunta, top_k=k)
+
+    # ── Passo 2: Construção do prompt via chat template ──
+    conteudo = construir_prompt(pergunta, docs)
+    messages = [{"role": "user", "content": conteudo}]
+    resp = client.chat.completions.create(
+        model='google/gemma-3-12b-it',
+        messages=messages,
+    )
+
+
+    return resp.choices[0].message.content, docs
+
+
+print("Pipeline RAG pronto!")
+
+
+# ── Teste do RAG ──────────────────────────────────────────────────────────────
+# Faça várias perguntas sobre o seu PDF e observe as respostas!
+
+if __name__ == "__main__":
+    
+    PERGUNTA = "Quando foi criada a interligência artificial?"   # ← edite aqui
+    
+    resposta, docs = responder_rag(PERGUNTA, k=3)
+
+    print(f"PERGUNTA: {PERGUNTA}")
+    print()
+    print("TRECHOS RECUPERADOS:")
+    for d in docs:
+        print(f"  [{d['id']}] {d['conteudo'][:100]}...")
+    print()
+    print("RESPOSTA DO RAG:")
+    print(textwrap.fill(resposta, width=90))
+    print("\n" + "="*90)
