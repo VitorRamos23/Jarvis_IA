@@ -21,7 +21,7 @@ pip install -qU python-telegram-bot nest_asyncio
 pip install pytz
 ```
 
-
+python3 conversao.py
 # Passo 3 — Ativar o bot no Telegram 
 
 **9.1** Abra o arquivo `src/bot_telegram.py` e substitua o token:
