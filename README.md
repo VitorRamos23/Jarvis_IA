@@ -114,14 +114,21 @@ Caso queira acessar pelo Google Colab, segue o link para o notebook:
 
 https://colab.research.google.com/drive/1iLglylzi4_hBEwvGvhZZKwTrwgMizIL3?usp=sharing
 
-# Ocorrencias e Soluções
+# Ocorrências e Soluções
 
-Uma das duvidas que tivemos foi para criação de Chunks, onde consideramos as formas: janela, fixa e por paragrafo. Foi escolhida a de janela pois dependendo do artigo poderiamos ter paragrafos de 10 linhas ou paragrafos de 3 linhas, isso seria uma mudança muito grande o que nos fez optar por utilizar a janela que é a mais eficiente dos 3 metodos.
-Sobre a Busca Lexica e Semantica escolhemos utilizar a Hibrida pois ela completaria melhor o que nosso trabalho necessitava.
-As outras funções ficaram no codigo mas para o experimento foi utilizado somente a Janela e a hibrida.
-Para a Agenda nossa primeira ideia foi fazer uma agenda estatica onde ela receberia o dia, uma data seu tipo, o horario e o titulo. No entando, para compromissos recorrentes que ocorressem toda semana ela era ineficiente, na nova agenda devidimos ela em duas formas, uma para compromissos unicos e outra para compromissos corriqueiros.
-Para a Lista de Tarefas colocamos as funções adicionar, listar, concluir e limpar, sem grandes problemas.
-No toolcalling ele é o mestre que chama todos os outros.
-Para execução do Jarvis utilizamos tanto o botfather do Telegram quanto o próprio terminal do usúario, nossa ideia inicial era utilizarmos somente o bot do Telegram mas como tivemos problemas pois era necessario instalar o telegram para utiliza-lo, optamos por também deixar disponivel a versão para o terminal.
-Toda nossa implementação foi realizada no google colab, no entanto como era necessario que o Jarvis fosse acessado localmente tivemos alguns problemas com o acesso as pastas pois ela estava acessando no Drive. A dvisão do codigo em diferentes arquivos presentes na pasta src foi um desafio também.
+Durante o desenvolvimento do projeto surgiram diversas dúvidas e desafios relacionados à implementação do JARVIS Acadêmico.
+
+Uma das principais dúvidas ocorreu na criação dos *chunks* para o sistema RAG. Foram consideradas três abordagens: por tamanho fixo, por parágrafo e por janela deslizante. A abordagem por parágrafo acabou sendo descartada, pois alguns artigos possuíam parágrafos muito extensos enquanto outros apresentavam parágrafos extremamente curtos, gerando uma grande inconsistência nos dados processados. Por esse motivo, optamos pelo método de janela deslizante (*sliding window*), que apresentou resultados mais eficientes e equilibrados para o projeto. Apesar disso, as demais implementações permaneceram disponíveis no código para testes futuros.
+
+Outro ponto importante foi a escolha entre busca léxica, busca semântica ou busca híbrida. Decidimos utilizar a busca híbrida, combinando BM25 com embeddings semânticos, pois essa abordagem atendia melhor às necessidades do projeto, trazendo resultados mais relevantes nas consultas realizadas pelo usuário.
+
+Na implementação da agenda acadêmica, nossa ideia inicial consistia em uma agenda estática, contendo apenas dia, data, horário, tipo e título do compromisso. Entretanto, percebemos que esse modelo era ineficiente para compromissos recorrentes, como atividades semanais. Para solucionar esse problema, dividimos a agenda em duas categorias: compromissos únicos e compromissos recorrentes, tornando o sistema mais flexível e funcional.
+
+Já na lista de tarefas, implementamos as funções de adicionar, listar, concluir e limpar tarefas. Essa parte do projeto foi desenvolvida sem grandes dificuldades.
+
+O módulo de *tool calling* foi desenvolvido como o núcleo central do sistema, sendo responsável por coordenar e chamar todas as demais funcionalidades do JARVIS.
+
+Para a execução do projeto, utilizamos tanto o BotFather do Telegram quanto a execução diretamente pelo terminal do usuário. Inicialmente, nossa ideia era disponibilizar apenas a versão integrada ao Telegram. No entanto, percebemos que seria necessário instalar o aplicativo do Telegram para utilizar o sistema, então decidimos também manter uma versão executável via terminal, ampliando as possibilidades de uso.
+
+Toda a implementação foi realizada inicialmente no Google Colab. Porém, como o JARVIS precisava ser executado localmente, encontramos dificuldades relacionadas ao acesso aos arquivos e diretórios, já que parte do sistema estava integrada ao Google Drive. Outro desafio enfrentado foi a divisão do código em múltiplos arquivos dentro da pasta `src`, exigindo uma melhor organização e comunicação entre os módulos do projeto.
 
