@@ -1,7 +1,7 @@
 ### Alunos
 
 Vitor Mucio Ramos - Turma 19190005634-T02-2026-1
-Diogo Mantovani Saito - Turma 
+Diogo Mantovani Saito - Turma 19190005634-T03-2026-1-T03-2026-1
 
 # JARVIS Acadêmico
 
