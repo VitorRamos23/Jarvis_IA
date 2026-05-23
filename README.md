@@ -108,6 +108,15 @@ O comando de inicialização é
 python3 src/terminal.py
 ```
 
+### Sugestões de Perguntas
+
+```bash
+Tenho aula essa semana?
+Tenho Prova esta semana?
+Quando foi criada a IA?
+Qual a base de IA?
+```
+
 ---
 # Link
 Caso queira acessar pelo Google Colab, segue o link para o notebook:
