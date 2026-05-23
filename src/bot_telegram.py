@@ -1,7 +1,7 @@
+# -*- coding: utf-8 -*-
 import nest_asyncio
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
-# _*_coding: utf-8_*_
 
 nest_asyncio.apply()
 
