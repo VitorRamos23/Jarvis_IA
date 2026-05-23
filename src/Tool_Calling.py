@@ -1,4 +1,7 @@
-# _*_coding: utf-8_*_
+# -*- coding: utf-8 -*-
+from datetime import datetime
+import json
+from openai import OpenAI
 
 LOG = "jarvis_log.txt"
 
