@@ -1,3 +1,5 @@
+# _*_coding: utf-8_*_
+
 LOG = "jarvis_log.txt"
 
 def registrar_log(ferramenta, entrada, saida):
