@@ -131,8 +131,12 @@ Uma das principais dúvidas ocorreu na criação dos *chunks* para o sistema RAG
 
 Outro ponto importante foi a escolha entre busca léxica, busca semântica ou busca híbrida. Decidimos utilizar a busca híbrida, combinando BM25 com embeddings semânticos, pois essa abordagem atendia melhor às necessidades do projeto, trazendo resultados mais relevantes nas consultas realizadas pelo usuário.
 
-Na implementação da agenda acadêmica, nossa ideia inicial consistia em uma agenda estática, contendo apenas dia, data, horário, tipo e título do compromisso. Entretanto, percebemos que esse modelo era ineficiente para compromissos recorrentes, como atividades semanais. Para solucionar esse problema, dividimos a agenda em duas categorias: compromissos únicos e compromissos recorrentes, tornando o sistema mais flexível e funcional.
+Na implementação da agenda acadêmica, nossa ideia inicial consistia em uma agenda estática, contendo apenas dia, data, horário, tipo e título do compromisso. Entretanto, percebemos que esse modelo era ineficiente para compromissos recorrentes, como aulas semanais, reuniões fixas e atividades frequentes.
+Para solucionar esse problema, dividimos a agenda em duas categorias: compromissos únicos e compromissos recorrentes. Os compromissos únicos armazenam eventos específicos com uma data definida, como provas e apresentações, enquanto os compromissos recorrentes utilizam o dia da semana como referência, permitindo que o sistema identifique automaticamente eventos que acontecem semanalmente.
 
+Além disso, implementamos consultas inteligentes para diferentes períodos de tempo, permitindo ao usuário verificar compromissos de hoje, amanhã, da semana atual e também da próxima semana. Essa funcionalidade tornou a agenda mais dinâmica, flexível e próxima de um sistema real de gerenciamento acadêmico.
+
+Outro cuidado importante foi o tratamento correto de datas e horários utilizando fuso horário local, além da identificação automática do dia da semana para evitar inconsistências nas respostas fornecidas pela IA.
 Já na lista de tarefas, implementamos as funções de adicionar, listar, concluir e limpar tarefas. Essa parte do projeto foi desenvolvida sem grandes dificuldades.
 
 O módulo de *tool calling* foi desenvolvido como o núcleo central do sistema, sendo responsável por coordenar e chamar todas as demais funcionalidades do JARVIS.
