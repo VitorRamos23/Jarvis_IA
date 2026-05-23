@@ -16,10 +16,7 @@ def registrar_log(ferramenta, entrada, saida):
 print("Sistema de registrado ativado")
 
 def jarvis(comando):
-  """
-  Esta função chama todas as ferramentas criadas para o funcionamento
-  do JARVIS
-  """
+  
   prompt = """
   Olá JARVIS. Analise o pedido do usuário e decida qual ferramenta utilizar.
   Você possui EXATAMENTE 6 ferramentas:
