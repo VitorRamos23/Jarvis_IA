@@ -4,6 +4,7 @@ import pytz # Para colocar a data no fuso-horário local
 from datetime import date, timedelta, datetime
 
 
+
 # --- Agenda melhorada ---
 agenda = [
 
