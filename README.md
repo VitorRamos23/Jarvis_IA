@@ -108,15 +108,34 @@ O comando de inicialização é
 python3 src/terminal.py
 ```
 
-### Sugestões de Perguntas
+## Passo 6 Sugestões de Utilizações
+
+### Passo 6.1 para conteúdo
 
 ```bash
-Tenho aula essa semana?
-Tenho Prova esta semana?
+Quais são os principais desafios da IA na educação?
+Como a inteligência artificial pode personalizar o ensino?
 Quando foi criada a IA?
-Qual a base de IA?
+Qual a diferença entre IA forte e IA fraca?
+O que é Big Data e qual sua relação com IA?
+Como a IA afeta a privacidade das pessoas?
 ```
 
+### Passo 6.2 Para Tarefas
+
+```bash
+Quero adicionar a tarefa futebol Terça feira as 20 horas
+Quero mostras as tarefas
+Quero limpar as tarefas
+```
+
+### Passo 6.3 Para Agenda
+
+```bash
+Quais meus compromissos dessa semana?
+Quais meus compromissos da semana que vem?
+Quais meus compromissos hoje
+```
 ---
 # Link
 Caso queira acessar pelo Google Colab, segue o link para o notebook:
