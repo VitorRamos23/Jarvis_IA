@@ -1,5 +1,3 @@
-!pip install -qU python-telegram-bot nest_asyncio
-
 import nest_asyncio
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
