@@ -1,3 +1,43 @@
+# JARVIS Acadêmico
+
+Projeto desenvolvido para a disciplina de Inteligência Artificial.  
+O JARVIS Acadêmico é um assistente virtual capaz de responder perguntas sobre materiais em PDF, consultar agenda e gerenciar tarefas pelo Telegram.
+
+## Funcionalidades
+
+- Conversão de PDFs para Markdown
+- Busca em materiais acadêmicos usando RAG
+- Busca léxica com BM25
+- Busca semântica com FAISS e Sentence Transformers
+- Consulta de agenda acadêmica
+- Gerenciamento de tarefas
+- Integração com bot do Telegram
+- Registro de ações em arquivo de log
+
+## Estrutura do Projeto
+
+```text
+Jarvis_IA-main/
+│
+├── Data/                 # PDFs usados como base de conhecimento
+├── Markdown/             # Arquivos convertidos de PDF para Markdown
+├── src/
+│   ├── agenda.py
+│   ├── bot_telegram.py
+│   ├── config.py
+│   ├── conversao.py
+│   ├── criacao_de_pasta.py
+│   ├── lista_de_tarefas.py
+│   ├── rag_busca_chunks.py
+│   └── tool_calling.py
+│
+├── .env
+├── README.md
+└── Jarvis_IA_Traduzido.ipynb
+
+
+# COMO EXECUTAR
+
 # Passo 1 - Acessando o Ambiente Virtual
 
 Para acessar o Ambiente virtual é necessario 
@@ -23,36 +63,3 @@ pip install pytz
 
 python3 conversao.py
 # Passo 3 — Ativar o bot no Telegram 
-
-**9.1** Abra o arquivo `src/bot_telegram.py` e substitua o token:
-
-```python
-BOT_TOKEN = "SEU_TOKEN_AQUI"  # token gerado pelo @BotFather
-```
-
-**9.2** Execute a última célula do notebook que inicializa o bot:
-
-```python
-app.run_polling()
-```
-
-**9.3** Abra o Telegram, procure o seu bot pelo nome e envie `/start`.
-
-A partir daí, basta conversar normalmente — o JARVIS responde perguntas, consulta a agenda e gerencia suas tarefas direto pelo chat.
-
----
-
-## Como o JARVIS decide o que fazer
-
-Toda mensagem passa pelo `Tool_Calling.py`, que envia o texto ao LLM. O modelo lê o pedido e retorna qual das 6 ações executar:
-
-| Ação | Quando é usada |
-|---|---|
-| `buscar_material_rag` | Perguntas sobre os PDFs indexados |
-| `consultar_agenda` | Compromissos de hoje, amanhã ou na semana |
-| `adicionar_tarefa` | Anotar algo novo na lista |
-| `listar_tarefas` | Ver todas as tarefas |
-| `concluir_tarefa` | Marcar uma tarefa como feita |
-| `limpar_tarefas` | Apagar toda a lista |
-
-Cada ação executada é salva automaticamente no arquivo `jarvis_log.txt`.
