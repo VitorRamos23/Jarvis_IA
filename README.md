@@ -83,9 +83,9 @@ python3 src/bot_telegram.py
 http://t.me/jarvis_ufms_ia_bot
 
 O comando de inicialização é 
-
+```bash
 /start
-
+```
 ---
 # Link
 Caso queira acessar pelo Google Colab, segue o link para o notebook:
