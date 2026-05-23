@@ -1,4 +1,4 @@
-## Passo 1 - Acessando o Ambiente Virtual
+# Passo 1 - Acessando o Ambiente Virtual
 
 Para acessar o Ambiente virtual é necessario 
 ### 1. Cria a bolha (isso vai fazer a pasta venv aparecer aí na sua imagem)
@@ -9,7 +9,7 @@ source venv/bin/activate
 
 
 
-## Passo 2 — Instalar as dependências
+# Passo 2 — Instalar as dependências
 
 Execute as células de instalação no topo do notebook, uma por vez:
 
