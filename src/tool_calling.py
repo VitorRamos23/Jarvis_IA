@@ -25,7 +25,7 @@ def registrar_log(ferramenta, entrada, saida):
     arquivo.write(f"SAÍDA (Resultado)  :\n{saida}\n")
     arquivo.write("==================================================\n\n")
 
-  print(f"*Log registrado com sucesso para a ferramenta: {ferramenta}!*")
+  print(f"Log registrado com sucesso para a ferramenta: {ferramenta}!")
 
 print("Sistema de registrado ativado")
 
