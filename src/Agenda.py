@@ -2,7 +2,7 @@
 import json
 import pytz # Para colocar a data no fuso-horário local
 from datetime import date, timedelta, datetime
-
+from openai import OpenAI
 
 
 # --- Agenda melhorada ---
