@@ -1,10 +1,10 @@
 ### Passo 1 - Acessando o Ambiente Virtual
 
 Para acessar o Ambiente virtual é necessario 
-# 1. Cria a bolha (isso vai fazer a pasta venv aparecer aí na sua imagem)
+### 1. Cria a bolha (isso vai fazer a pasta venv aparecer aí na sua imagem)
 python3 -m venv venv
 
-# 2. Entra na bolha (ativa o ambiente)
+### 2. Entra na bolha (ativa o ambiente)
 source venv/bin/activate
 
 
