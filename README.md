@@ -110,6 +110,8 @@ python3 src/terminal.py
 
 ## Passo 6 Sugestões de Utilizações
 
+Para não haver problemas
+
 ### Passo 6.1 para conteúdo
 
 ```bash
@@ -119,6 +121,7 @@ Quando foi criada a IA?
 Qual a diferença entre IA forte e IA fraca?
 O que é Big Data e qual sua relação com IA?
 Como a IA afeta a privacidade das pessoas?
+O que é approximate computing?
 ```
 
 ### Passo 6.2 Para Tarefas
