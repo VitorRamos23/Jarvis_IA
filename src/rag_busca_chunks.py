@@ -135,9 +135,9 @@ if __name__ == "__main__":
     pergunta = "quais são os avanços da inteligência artificial"
     resultados = busca_hibrida(pergunta, top_k=3)
 
-print(f"JARVIS encontrou {len(resultados)} trechos usando Busca Híbrida:")
-for r in resultados:
-    print(f"- Fonte: {r['fonte']} | Trecho: {r['conteudo'][:150]}...")
+    print(f"JARVIS encontrou {len(resultados)} trechos usando Busca Híbrida:")
+    for r in resultados:
+        print(f"- Fonte: {r['fonte']} | Trecho: {r['conteudo'][:150]}...")
 
 
 def construir_prompt(pergunta, docs):
