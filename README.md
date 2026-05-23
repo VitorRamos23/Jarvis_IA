@@ -1,5 +1,8 @@
 Pips
 
+# OpenIA
+!pip install openai python-dotenv
+
 # Transformando PDF em MD
 !pip -q install -U docling transformers sentence-transformers
 
