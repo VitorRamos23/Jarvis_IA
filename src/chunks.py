@@ -1,3 +1,13 @@
+# Instalação limpa e específica
+!pip install -qU rank_bm25 faiss-cpu sentence-transformers
+
+import re
+import numpy as np
+from rank_bm25 import BM25Okapi
+import faiss
+from sentence_transformers import SentenceTransformer
+
+
 def chunking_fixo(texto, tamanho=500):
     chunks = []
     inicio = 0
@@ -53,14 +63,6 @@ def carregar_e_processar_biblioteca(pasta_origem, estrategia="janela"):
                     "conteudo": trecho.strip()
                 })
 
-# Instalação limpa e específica
-!pip install -qU rank_bm25 faiss-cpu sentence-transformers
-
-import re
-import numpy as np
-from rank_bm25 import BM25Okapi
-import faiss
-from sentence_transformers import SentenceTransformer
 
 # Preparação para o BM25 (Lexical)
 def tokenizar(conteudo):
