@@ -1,12 +1,15 @@
-Pips
-
+Para acessar o Ambiente virtual é necessario 
 # 1. Cria a bolha (isso vai fazer a pasta venv aparecer aí na sua imagem)
 python3 -m venv venv
 
 # 2. Entra na bolha (ativa o ambiente)
 source venv/bin/activate
 
-# 3. Instala as bibliotecas de vez
+
+Pips
+
+Para fazer as italações
+# Instala as bibliotecas de vez
 pip install openai python-dotenv
 
 # OpenIA
