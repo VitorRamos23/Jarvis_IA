@@ -1,17 +1,21 @@
 # -*- coding: utf-8 -*-
 
-import textwrap
-import re
 import numpy as np
-from rank_bm25 import BM25Okapi
-import faiss
-from sentence_transformers import SentenceTransformer
+
+from chunks import (
+    biblioteca_jarvis,
+    indice_bm25,
+    modelo_embed,
+    indice_faiss,
+    matriz_emb,
+    tokenizar
+)
 
 def recuperar_bm25(pergunta, k=3):
     """Busca léxica: pontua chunks por frequência de termos da pergunta."""
     scores = indice_bm25.get_scores(tokenizar(pergunta))
     idx = np.argsort(scores)[::-1][:k]
-    return [{"id": biblioteca_jarvis[i]["id"], "texto": biblioteca_jarvis[i]["texto"], "score": float(scores[i])} for i in idx]
+    return [{"id": biblioteca_jarvis[i]["id"], "conteudo": biblioteca_jarvis[i]["conteudo"], "score": float(scores[i])} for i in idx]
 
 
 def recuperar_dense(pergunta, k=3):
