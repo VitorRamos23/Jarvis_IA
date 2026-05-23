@@ -30,13 +30,20 @@ def inicializar_agenda():
             "recorrencia": "semanal",
             "dia_de_semana": 0 # Segunda feira
         },
+                {
+            "titulo": "Futebol",
+            "tipo": "reuniao",
+            "horario": "19:30 - 22:00",
+            "recorrencia": "semanal",
+            "dia_de_semana": 1 # terça feira
+        },
         # Compromissos Únicos (data específica)
         {
             "titulo": "Prova de Banco de Dados",
             "tipo": "prova",
             "horario": "07:15 - 09:15",
             "recorrencia": "unica",
-            "data": "22/05/2026"
+            "data": "26/05/2026"
         },
         {
             "titulo": "Prova de Inteligência Artifical",
@@ -50,7 +57,13 @@ def inicializar_agenda():
             "tipo": "prova",
             "horario": "07:15 - 09:15",
             "recorrencia": "unica",
-            "data": "19/05/2026"
+            "data": "29/05/2026"
+        }
+            "titulo": "Prova de Calculo",
+            "tipo": "prova",
+            "horario": "13:15 - 15:05",
+            "recorrencia": "unica",
+            "data": "02/06/2026"
         }
     ]
 
