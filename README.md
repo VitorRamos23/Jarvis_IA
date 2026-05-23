@@ -88,6 +88,8 @@ python3 src/conversao.py
 
 ### Passo 5.1 Ativando e utilizando o Jarvis no Telegram
 
+O telegram deve estar baixado ou na sua maquina ou no seu celular
+
 ```bash
 python3 src/bot_telegram.py
 ```
