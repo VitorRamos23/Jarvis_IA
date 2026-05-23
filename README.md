@@ -22,7 +22,7 @@ pip install pytz
 ```
 
 
-### Passo 9 — Ativar o bot no Telegram (opcional)
+# Passo 3 — Ativar o bot no Telegram 
 
 **9.1** Abra o arquivo `src/bot_telegram.py` e substitua o token:
 
