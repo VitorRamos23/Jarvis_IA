@@ -34,8 +34,7 @@ Jarvis_IA-main/
 ├── .env
 ├── README.md
 └── Jarvis_IA_Traduzido.ipynb
-
-
+```
 # COMO EXECUTAR
 
 # Passo 1 - Acessando o Ambiente Virtual
@@ -61,5 +60,4 @@ pip install -qU python-telegram-bot nest_asyncio
 pip install pytz
 ```
 
-python3 conversao.py
 # Passo 3 — Ativar o bot no Telegram 
