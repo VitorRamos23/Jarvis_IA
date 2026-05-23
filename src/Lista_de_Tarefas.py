@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+
 import os
+import json
+from openai import OpenAI
 
 ARQUIVO_TAREFAS = "tarefas.json"
 
