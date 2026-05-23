@@ -4,7 +4,7 @@ import numpy as np
 from rank_bm25 import BM25Okapi
 import faiss
 from sentence_transformers import SentenceTransformer
-!pip install -qU rank_bm25 faiss-cpu sentence-transformers
+
 
 def recuperar_bm25(pergunta, k=3):
     """Busca léxica: pontua chunks por frequência de termos da pergunta."""
