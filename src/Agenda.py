@@ -2,42 +2,6 @@ import json
 import pytz # Para colocar a data no fuso-horário local
 from datetime import date, timedelta, datetime
 
-# --- Agenda simples para testes ---
-"""
-# Data adquirida de forma dinâmica
-hoje = date.today()
-amanha = hoje + timedelta(days=1)
-depois_de_amanha = hoje + timedelta(days=2)
-
-# criação da agenda de teste
-agenda = [
-    {
-        "data": hoje.strftime("%d/%m/%Y"),
-        "tipo": "reuniao",
-        "titulo": "TCC",
-        "horario": "15:25 - 16:25"
-    },
-    {
-        "data": hoje.strftime("%d/%m/%Y"),
-        "tipo": "aula",
-        "titulo": "Inteligência Artificial",
-        "horario": "18:30 - 22:30"
-    },
-    {
-        "data": amanha.strftime("%d/%m/%Y"),
-        "tipo": "prova",
-        "titulo": "Avaliação de Banco de Dados",
-        "horario": "07:15 - 09:15"
-    },
-    {
-        "data": depois_de_amanha.strftime("%d/%m/%Y"),
-        "tipo": "aula",
-        "titulo": "Programação Paralela",
-        "horario": "07:15 - 09:15"
-    }
-]
-"""
-
 # --- Agenda melhorada ---
 agenda = [
 
@@ -163,20 +127,6 @@ def consultar_agenda_melhorada(periodo="hoje"):
 
 #Por meio da pergunta vai pegar os dados que correspondem
 def responder_agenda(pergunta, periodo):
-  """
-  pergunta_normalizada = pergunta.lower()
-  if "hoje" in pergunta_normalizada:
-    periodo = "hoje"
-  elif "amanhã" in pergunta_normalizada or "amanha" in pergunta_normalizada:
-    periodo = "amanha"
-  elif "semana" in pergunta_normalizada:
-    periodo = "semana"
-  # Adicionar esse campo para tornar mais completo o JARVIS
-  elif "semana que vem" in pergunta_normalizada or "próxima semana" in pergunta_normalizada:
-    periodo = "proxima_semana"
-  else:
-    return "Desculpe, só consulto a agenda para 'hoje', 'amanhã', 'esta semana' ou semana que vem."
-  """
   compromissos = consultar_agenda_melhorada(periodo)
 
   # IA com problemas, alucinando com os dias da semana
