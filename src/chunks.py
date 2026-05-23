@@ -1,5 +1,4 @@
-# Instalação limpa e específica
-!pip install -qU rank_bm25 faiss-cpu sentence-transformers
+
 
 import re
 import numpy as np
