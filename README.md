@@ -145,3 +145,7 @@ Para a execução do projeto, utilizamos tanto o BotFather do Telegram quanto a 
 
 Toda a implementação foi realizada inicialmente no Google Colab. Porém, como o JARVIS precisava ser executado localmente, encontramos dificuldades relacionadas ao acesso aos arquivos e diretórios, já que parte do sistema estava integrada ao Google Drive. Outro desafio enfrentado foi a divisão do código em múltiplos arquivos dentro da pasta `src`, exigindo uma melhor organização e comunicação entre os módulos do projeto.
 
+
+### Link para o vídeo no Youtube
+
+```https://youtu.be/pgduEWOVcag```
