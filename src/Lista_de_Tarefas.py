@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 
 ARQUIVO_TAREFAS = "tarefas.json"
