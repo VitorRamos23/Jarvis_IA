@@ -1,14 +1,22 @@
-# -*- coding: utf-8 -*-
-
-from tool_calling import jarvis
-import nest_asyncio
+import os
+from dotenv import load_dotenv
+from pathlib import Path
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 
-nest_asyncio.apply()
+from tool_calling import jarvis
 
-#Talvez precise mudar
-BOT_TOKEN = "8639629066:AAGHC1AVMacQdUnwTvt5JTF0hIJJJdh8JYU"
+src_projeto = Path(__file__).parent if "__file__" in locals() else Path.cwd()
+raiz_projeto = src_projeto.parent
+
+caminho_env = raiz_projeto / ".env"
+BOT_TOKEN = os.getenv("TELEGRAM_TOKEN")
+
+if not BOT_TOKEN:
+   raise ValueError ("Token do Telegram não encontrado! Verifique o arquivo .env.")
+
+
+#Funções do Bot
 
 async def comando_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     boas_vindas = "JARVIS ONLINE. Olá meu Homem de Ferro. Como posso ajudar?"
