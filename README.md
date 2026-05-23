@@ -148,4 +148,4 @@ Toda a implementação foi realizada inicialmente no Google Colab. Porém, como 
 
 ### Link para o vídeo no Youtube
 
-```https://youtu.be/pgduEWOVcag```
+https://youtu.be/pgduEWOVcag
