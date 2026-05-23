@@ -6,6 +6,7 @@ from rank_bm25 import BM25Okapi
 import faiss
 from sentence_transformers import SentenceTransformer
 from pathlib import Path
+from criacao_de_pasta import pasta_md
 
 def chunking_fixo(texto, tamanho=500):
     chunks = []
