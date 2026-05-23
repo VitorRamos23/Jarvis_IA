@@ -1,21 +1,26 @@
-# -*- coding: utf-8 -*-
-
-import os
 import json
-from openai import OpenAI
+from pathlib import Path
+from config import client
 
-ARQUIVO_TAREFAS = "tarefas.json"
+src_projeto = Path(__file__).parent if "__file__" in locals() else Path.cwd()
+raiz_projeto = src_projeto.parent
 
-if not os.path.exists(ARQUIVO_TAREFAS):
-    with open(ARQUIVO_TAREFAS, "w", encoding="utf-8") as arquivo:
-        json.dump([], arquivo, indent=4, ensure_ascii=False)
+# Define as pastas de origem e destino
+caminho_tarefas = raiz_projeto / "tarefas.json"
+
+def inicializar_tarefas():
+  if not caminho_tarefas.exists():
+    with open(caminho_tarefas, "w", encoding="utf-8") as arquivo:
+      json.dump([], arquivo, indent=4, ensure_ascii=False)
+       
+inicializar_tarefas()
 
 def carregar_tarefas():
-  with open(ARQUIVO_TAREFAS, "r", encoding="utf-8") as arquivo:
+  with open(caminho_tarefas, "r", encoding="utf-8") as arquivo:
     return json.load(arquivo)
 
 def salvar_tarefas(tarefas):
-  with open(ARQUIVO_TAREFAS, "w", encoding="utf-8") as arquivo:
+  with open(caminho_tarefas, "w", encoding="utf-8") as arquivo:
     json.dump(tarefas, arquivo, indent= 4, ensure_ascii=False)
 
 def adicionar_tarefa(corpo):
@@ -50,6 +55,7 @@ def concluir_tarefa(id):
     if i["id"] == int(id):
       if i["concluida"]:
         return f"A tarefa {id} já está concluída."
+      
       i["concluida"] = True
       salvar_tarefas(tarefas)
       return f"A tarefa [{id}] {i['corpo']} foi marcada como concluída."
@@ -119,4 +125,32 @@ def gerenciar_tarefas_JARVIS(comando):
 
   except Exception as e:
     return f"Ocorreu um erro: {e}"
-print("JARVIS está conectado às tarefas!")
+
+
+if __name__ == "__main__":
+    print(gerenciar_tarefas_JARVIS("JARVIS, pode deletar todas as tarefas da minha lista."))
+    print("-" * 50)
+
+    print(gerenciar_tarefas_JARVIS("Me mostra as tarefas agora."))
+    print("-" * 50)
+
+    # Teste 1: Adicionar (Note que a frase é natural, não é um comando de programação)
+    print(gerenciar_tarefas_JARVIS("JARVIS, anota aí pra eu terminar o relatório de circuitos aproximados mais tarde."))
+    print("-" * 50)
+
+    print(gerenciar_tarefas_JARVIS("Preciso de adicionar uma tarefa para verificar os ficheiros VHDL."))
+    print("-" * 50)
+
+    # Teste 2: Listar
+    print(gerenciar_tarefas_JARVIS("Mostra-me a minha lista de tarefas, por favor."))
+    print("-" * 50)
+
+    # Teste 3: Concluir (Use o ID que ele gerou no Teste 1)
+    print(gerenciar_tarefas_JARVIS("Já finalizei a tarefa número 3!"))
+    print("-" * 50)
+
+    print(gerenciar_tarefas_JARVIS("Já finalizei a tarefa número 2!"))
+    print("-" * 50)
+
+    # Verificando se a lista atualizou
+    print(gerenciar_tarefas_JARVIS("Como está a lista agora?"))
