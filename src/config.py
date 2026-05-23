@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from pathlib import Path
 
 
-src_projeto = Path(_file).parent if "file_" in locals() else Path.cwd()
+src_projeto = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 raiz_projeto = src_projeto.parent
 
 caminho_env = raiz_projeto / ".env"
