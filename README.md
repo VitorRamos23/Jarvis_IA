@@ -44,7 +44,6 @@ Jarvis_IA-main/
 │
 ├── .env
 ├── README.md
-└── Jarvis_IA_Traduzido.ipynb
 ```
 
 # COMO EXECUTAR
