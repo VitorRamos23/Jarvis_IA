@@ -1,3 +1,8 @@
+### Alunos
+
+Vitor Mucio Ramos - Turma 19190005634-T02-2026-1
+Diogo Mantovani Saito - Turma 
+
 # JARVIS Acadêmico
 
 Projeto desenvolvido para a disciplina de Inteligência Artificial.  
@@ -171,7 +176,6 @@ Toda a implementação foi realizada inicialmente no Google Colab. Porém, como 
 ### Link para o vídeo no Youtube
 
 https://youtu.be/pgduEWOVcag
-
 
 ### Link para o Github
 
