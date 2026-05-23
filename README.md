@@ -14,10 +14,11 @@ source venv/bin/activate
 Execute as células de instalação no topo do notebook, uma por vez:
 
 ```bash
-!pip install openai python-dotenv
-!pip install -U docling transformers sentence-transformers
-!pip install -qU rank_bm25 faiss-cpu
-!pip install -qU python-telegram-bot nest_asyncio
+pip install openai python-dotenv
+pip install -U docling transformers sentence-transformers
+pip install -qU rank_bm25 faiss-cpu
+pip install -qU python-telegram-bot nest_asyncio
+pip install pytz
 ```
 
 ---
