@@ -47,5 +47,5 @@ for arquivo_pdf in pasta_pdf.glob("*.pdf"):
     except Exception as e:
         print(f"Erro ao converter {arquivo_pdf.name}: {e}")
 
-print(f"\nConversão concluída! {contador} arquivos Markdown gerados e salvos no Drive.")
+print(f"\nConversão concluída! {contador} arquivos Markdown gerados e salvos na pasta Markdown.")
 print(f"- {pulados} arquivos já existentes foram ignorados.")
