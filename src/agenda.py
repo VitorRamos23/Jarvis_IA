@@ -120,9 +120,7 @@ def consultar_agenda_melhorada(periodo="hoje"):
 
 #Por meio da pergunta vai pegar os dados que correspondem
 def responder_agenda(pergunta, periodo):
-  """
-  Monta o contexto e pede para Gemma-3 formular a resposta falada.
-  """
+  
   compromissos = consultar_agenda_melhorada(periodo)
 
   # IA com problemas, alucinando com os dias da semana
@@ -162,7 +160,7 @@ def responder_agenda(pergunta, periodo):
   ]
 
   resposta = client.chat.completions.create(
-      model='google/gemma-3-12b-it',
+      model='Qwen/Qwen2.5-14B-Instruct-AWQ',
       messages=mensagens,
       temperature=0.2,
   )
