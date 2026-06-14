@@ -37,8 +37,10 @@ O JARVIS Acadêmico é um assistente virtual capaz de responder perguntas sobre 
 ```text
 Jarvis_IA-main/
 │
-├── Data/                 # PDFs usados como base de conhecimento
-├── Markdown/             # Arquivos convertidos de PDF para Markdown
+├── Data/                     # PDFs usados como base de conhecimento
+├── analise_de_erros/         # Relatório de análise de erros encontrados
+├── avaliacao_do_sistema/     # Avaliação e testes do sistema
+│
 ├── src/
 │   ├── agenda.py
 │   ├── bot_telegram.py
@@ -47,11 +49,11 @@ Jarvis_IA-main/
 │   ├── criacao_de_pasta.py
 │   ├── lista_de_tarefas.py
 │   ├── rag_busca_chunks.py
-│   ├── terminal.py
 │   └── tool_calling.py
 │
-├── .env
-├── README.md
+├── .env                      # Variáveis de ambiente
+├── README.md                 # Documentação do projeto
+└── conteudo_data.txt         # Resumo dos arquivos presentes em Data
 ```
 
 # COMO EXECUTAR - Linux
