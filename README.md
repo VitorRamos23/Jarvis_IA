@@ -81,6 +81,7 @@ pip install -U docling transformers sentence-transformers
 pip install -qU rank_bm25 faiss-cpu
 pip install -qU python-telegram-bot nest_asyncio
 pip install pytz
+pip install "rapidocr==3.7.0"
 ```
 
 ## Passo 4 — Converter Arquivos pdf para md
@@ -102,7 +103,7 @@ python3 src/bot_telegram.py
 ```
 ### link para o bot no Telegram
 
-http://t.me/jarvis_ufms_ia_bot
+http://t.me/JarvisIAUFMSBot
 
 O comando de inicialização é 
 ```bash
