@@ -7,6 +7,10 @@ from config import client
 from rag_busca_chunks import responder_rag
 from agenda import responder_agenda
 from lista_de_tarefas import adicionar_tarefa, limpar_tarefas, concluir_tarefa, listar_tarefas
+from planejador import plano_de_estudos
+from aprendizado import gerar_pergunta, avaliar_resposta, gerar_exercicios
+
+historico_recente = ""
 
 src_projeto = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 raiz_projeto = src_projeto.parent
@@ -34,9 +38,25 @@ def jarvis(comando):
   Esta função chama todas as ferramentas criadas para o funcionamento
   do JARVIS
   """
+  global historico_recente
+
+  if "AGUARDANDO RESPOSTA DA PERGUNTA" in historico_recente:
+    if comando.lower() in ["cancelar", "sair", "parar", "desisto", "outra coisa"]:
+      historico_recente = "STATUS: LIVRE PARA NOVOS COMANDOS."
+      return "Tudo bem, Como posso ajudar agora?"
+
+    resultado_final = avaliar_resposta(comando)
+    resultado_final = str(resultado_final).replace("**", "")
+
+    registrar_log("avaliar_resposta", comando, resultado_final)
+
+    historico_recente = f"STATUS: LIVRE PARA NOVOS COMANDOS.\nÚltima fala: {resultado_final}"
+    return resultado_final
+
+
   prompt = """
   Olá JARVIS. Analise o pedido do usuário e decida qual ferramenta utilizar.
-  Você possui EXATAMENTE 6 ferramentas:
+  Você possui EXATAMENTE 10 ferramentas:
 
   1. "buscar_material_rag": Para perguntas técnicas, conceitos ou dúvidas sobre os PDFs arquivados.
     - parametro: a pergunta EXATA do usuário.
@@ -50,6 +70,19 @@ def jarvis(comando):
     - parametro: APENAS o número do ID da tarefa (exemplo: "2").
   6. "limpar_tarefas": Para apagar, deletar ou limpar toda a lista de tarefas.
     - parametro: "nenhum"
+  7. "planejar_estudos": Para montar cronogramas, planos de estudos, ou perguntar o que priorizar hoje cruzando agenda e tarefas.
+    - parametro: a pergunta ou objetivo exato do usuário (ex: "O que devo priorizar hoje?").
+  8. "gerar_pergunta": Para testar o usuário fazendo uma pergunta sobre um tema específico para ele responder.
+    - parametro: o tema que ele quer ser testado.
+  9. "avaliar_resposta": Se o usuário estiver dando a resposta para uma pergunta que você fez, ou pedindo para avaliar se um conceito que ele explicou está certo.
+    - parametro: a resposta ou explicação exata fornecida pelo usuário.
+  10. "gerar_exercicios": Para criar materiais de revisão, resumos rápidos ou exercicios sobre um tema.
+    - parametro: o tema a ser revisado.
+
+  IMPORTANTE - CONTEXTO DA CONVERSA:
+  {historico_recente if historico_recente else "STATUS: LIVRE PARA NOVOS COMANDOS. Início da conversa."}
+
+  REGRA DE OURO MÁXIMA: Se o STATUS acima for "AGUARDANDO RESPOSTA DA PERGUNTA", o usuário NÃO está pedindo novos comandos ou exercícios. Ele está APENAS respondendo à pergunta que você fez. Você DEVE acionar OBRIGATORIAMENTE a ferramenta "avaliar_resposta" e usar o texto do usuário como parâmetro. Ignore palavras que pareçam acionar outras ferramentas.
 
   Responda EXCLUSIVAMENTE com um objeto JSON válido. Não escreva mais nada:
   {"ferramenta": "nome_da_ferramenta", "parametro": "valor"}
@@ -62,7 +95,7 @@ def jarvis(comando):
 
   try:
     resposta = client.chat.completions.create(
-        model='google/gemma-3-12b-it',
+        model='Qwen/Qwen2.5-14B-Instruct-AWQ',
         messages=mensagens,
         temperature=0, # 0 Para ser o mais objetivo possível
         timeout=15.0
@@ -99,11 +132,29 @@ def jarvis(comando):
     elif ferramenta == "limpar_tarefas":
       resultado_final = limpar_tarefas()
 
+    elif ferramenta == "planejar_estudos":
+      resultado_final = plano_de_estudos(parametro)
+
+    elif ferramenta == "gerar_pergunta":
+      resultado_final = gerar_pergunta(parametro)
+
+    elif ferramenta == "avaliar_resposta":
+      resultado_final = avaliar_resposta(parametro)
+
+    elif ferramenta == "gerar_exercicios":
+      resultado_final = gerar_exercicios(parametro)
+
     else:
       resultado_final = "Desculpe, não entendi o que você quer fazer."
 
+    resultado_final = str(resultado_final).replace("**", "")
     # Registra a ação no LOG
     registrar_log(ferramenta, parametro, str(resultado_final))
+
+    if ferramenta == "gerar_pergunta":
+      historico_recente = f"STATUS: AGUARDANDO RESPOSTA DA PERGUNTA.\nÚltima fala: {resultado_final}"
+    else:
+      historico_recente = f"STATUS: LIVRE PARA NOVOS COMANDOS.\nÚltima fala: {resultado_final}"
 
     return resultado_final
 
