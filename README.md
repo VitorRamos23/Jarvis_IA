@@ -177,9 +177,9 @@ Toda a implementação foi realizada inicialmente no Google Colab. Porém, como 
 
 ### Link para o vídeo no Youtube
 
-PArte 01: https://www.youtube.com/watch?v=pgduEWOVcag
+Parte 01: https://www.youtube.com/watch?v=pgduEWOVcag
 
-PArte 02: https://www.youtube.com/watch?v=L0E-nQQdBf4
+Parte 02: https://www.youtube.com/watch?v=L0E-nQQdBf4
 ### Link para o Github
 
 https://github.com/VitorRamos23/Jarvis_IA.git
