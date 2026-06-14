@@ -177,7 +177,7 @@ Toda a implementação foi realizada inicialmente no Google Colab. Porém, como 
 
 ### Link para o vídeo no Youtube
 
-https://youtu.be/pgduEWOVcag
+https://www.youtube.com/watch?v=L0E-nQQdBf4
 
 ### Link para o Github
 
