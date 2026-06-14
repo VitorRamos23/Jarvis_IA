@@ -167,7 +167,7 @@ def responder_rag(pergunta, metodo="hibrido", k=3, alpha=0.6, max_tokens=512):
     conteudo = construir_prompt(pergunta, docs)
     messages = [{"role": "user", "content": conteudo}]
     resp = client.chat.completions.create(
-        model='google/gemma-3-12b-it',
+        model='Qwen/Qwen2.5-14B-Instruct-AWQ',
         messages=messages,
     )
 
