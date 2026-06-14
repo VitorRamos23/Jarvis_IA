@@ -1,0 +1,19 @@
+Análise de Erros:
+
+Falha 1:
+-- O usuário respondeu uma pergunta feita pelo Jarvis dizendo "A principal dificuldade é na física", e o sistema ao invés de dizer que estava incorreto e corrigir gerou 3 exercícios de física do ensino médio.
+-- Tipo: Falha de roteamento (O Jarvis não interpretou a resposta da maneira certa e chamou a ferramenta de criação de perguntas).
+-- Causa: A LLM negligenciou a regra de contexto oferecida no prompt porque o peso da palavra "física" ativou a ferramenta de geração de exercícios.
+-- Possível solução: Forçar o fluxo do algoritmo de tal maneira que a próxima ferramenta a ser chamada depois da geração de pergunta seja sempre a geração de avaliação da pergunta realizada, independente a interpretação da LLM. Além disso, foi criada uma memória auxiliar em .json para que a LLM saiba o conteúdo da pergunta feita e gere uma avaliação de acordo.
+
+Falha 2:
+-- Ao enviar a seguinte pergunta para o Jarvis "De que forma a Mineração de Dados Educacionais (EDM) e a interatividade dos "Jogos Sérios" (Serious Games) podem atuar em conjunto no contexto pedagógico?" o sistema interpreta que deve chamar a ferramenta de geração de perguntas ou invés de buscar o conteúdo no banco de dados oferecido pelo usuário. Dessa forma, foi obtida a seguinte respostas "Como a Mineração de Dados Educacionais (EDM) utiliza abordagens computacionais para analisar dados educacionais, como você explicaria a aplicação desses métodos em conjunto com os Jogos Sérios (SGs) para melhorar o processo de ensino e aprendizagem?".
+-- Tipo: Erro de roteamento e Ambiguidade de ferramentas.
+-- causa: A LLM sofreu de confusão semântica. De alguma forma, a LLM interpretou que o contexto da pergunta fosse referente à ferramenta de aprendizado ao invés de realizar uma busca nos materiais proporcionados.
+-- Possível solução: Refinar o Prompt da ferramenta de geração de perguntas para deixar ela mais restritivas e menos ambígua, com a especificação de palavras chaves do usuário para ativar a ferramenta.
+
+Falha 3:
+-- Ao solicitar ao Jarvis as atividades que tenho ao longo da semana na agenda, o sistema recupera todos os eventos com sucesso. No entanto, ao relatar atividades que já aconteceram, ele tende a utilizar verbos no presente ou futuro, tratando eventos passados como se ainda fossem acontecer.
+-- Tipo: Erro de contexto temporal na NLG.
+-- Causa: O erro ocorre por uma falta de granularidade na comparação de datas. A função de exibir a agenda recupera o bloco de eventos corretamente, mas não compara a hora do evento com a hora atual da máquina do usuário. Sem essa marcação, a LLM assume que os compromissos estão acontecendo ou vão acontecer.
+-- Possível solução: Atualizar a função de consulta da agenda para comparar as datas dos eventos com a hora/dia atuais. Além disso, modificar o Prompt para que ele preste atenção nos eventos que já aconteceram, estão acontecendo e vão acontecer.
