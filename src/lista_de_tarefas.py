@@ -98,7 +98,7 @@ def gerenciar_tarefas_JARVIS(comando):
   try:
     # A API do modelo é chamada
     resposta = client.chat.completions.create(
-        model='google/gemma-3-12b-it',
+        model='Qwen/Qwen2.5-14B-Instruct-AWQ',
         messages=mensagens,
         temperature=0, # 0 Para ser o mais objetivo possível
         timeout=15.0
