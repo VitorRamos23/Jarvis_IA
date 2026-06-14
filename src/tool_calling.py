@@ -112,9 +112,17 @@ def jarvis(comando):
     ferramenta = dados_json.get("ferramenta")
     parametro = dados_json.get("parametro")
 
+    info_fontes_log = ""
+
     if ferramenta == "buscar_material_rag":
-      # O (, _) garante que pegue só o texto
-      resultado_final, _ = responder_rag(parametro, metodo="hibrido", k=10)
+      resultado_final, docs_recuperados = responder_rag(parametro, metodo="hibrido", k=10)
+
+      #Colocar os documentos recuperados no LOG
+      if isinstance(docs_recuperados, list):
+        fontes = {doc.get("fonte", "Desconhecida") for doc in docs_recuperados}
+        info_fontes_log = f"\n>> ARQUIVOS CONSULTADOS: {', '.join(fontes)}"
+      else:
+        info_fontes_log = "\n>> ARQUIVOS CONSULTADOS: Não identificados"
 
     elif ferramenta == "consultar_agenda":
       # Colocando a função responder_agenda garante respostas melhores
@@ -148,8 +156,11 @@ def jarvis(comando):
       resultado_final = "Desculpe, não entendi o que você quer fazer."
 
     resultado_final = str(resultado_final).replace("**", "")
+    
+    texto_log = resultado_final + info_fontes_log
+    
     # Registra a ação no LOG
-    registrar_log(ferramenta, parametro, str(resultado_final))
+    registrar_log(ferramenta, parametro, texto_log)
 
     if ferramenta == "gerar_pergunta":
       historico_recente = f"STATUS: AGUARDANDO RESPOSTA DA PERGUNTA.\nÚltima fala: {resultado_final}"
