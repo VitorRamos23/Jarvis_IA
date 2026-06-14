@@ -19,13 +19,13 @@ if not chave_api:
   raise ValueError("Chave  API não encontrada! Verifique o arquivo .env.")
 
 # Configura o cliente usando os dados dispostos pelo professor
-client = OpenAI(base_url='https://llm.liaufms.org/v1/gemma-3-12b-it', api_key='Cxt2ftLF7d3mHS2JdiFqB-eSDAQeZvFATPXPs02lV9A')
+client = OpenAI(base_url='https://llm.liaufms.org/v1/qwen2-5-14b-instruct-awq', api_key=chave_api)
 
 # Executa um teste para obter resposta do JARVIS
 if __name__ == "__main__":
   try:
     resp = client.chat.completions.create(
-      model='google/gemma-3-12b-it',
+      model='Qwen/Qwen2.5-14B-Instruct-AWQ',
       messages=[{'role': 'user', 'content': 'Hi'}],
     )
 
